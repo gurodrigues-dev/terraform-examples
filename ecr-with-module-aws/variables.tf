@@ -10,5 +10,5 @@ variable "region" {
 variable "example-repository-name" {
   description = "nome do repositorio"
   type        = string
-  default     = "tvx-example"
+  default     = "example"
 }

@@ -1,0 +1,33 @@
+controller:
+  ingressClassByName: true
+  ingressClassResource:
+    name: nginx-controller-public-backend
+    enabled: true
+    default: false
+    controllerValue: "k8s.io/nginx-controller-public-backend"
+  ingressClass: nginx-public-backend
+  service:
+    # enable the external LB
+    external:
+      enabled: true
+    targetPorts:
+      http: http
+      https: http
+    ports:
+      http: 80
+      https: 443
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-additional-resource-tags: "Name=nginx-controller-public-backend,Environment=dev"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:your-region:number-of-your-account:certificate/number-of-your-certificate
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: "true"
+      service.beta.kubernetes.io/aws-load-balancer-type: nlb
+      service.beta.kubernetes.io/aws-load-balancer-subnets: "subnet-public-1, subnet-public-2"
+      service.beta.kubernetes.io/aws-load-balancer-ssl-ports: https
+
+# helm upgrade --install nginx-controller-public-backend \
+#   ingress-nginx/ingress-nginx \
+#   --create-namespace \
+#   --namespace nginx-controller-public-backend \
+#   --set fullnameOverride=nginx-controller-public-backend \
+#   -f values.yaml

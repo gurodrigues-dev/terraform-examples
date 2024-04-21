@@ -1,0 +1,7 @@
+autoDiscovery:
+  clusterName: example-eks-name
+rbac:
+  serviceAccount:
+    annotations:
+      eks.amazonaws.com/role-arn: arn:aws:iam::number-of-your-account:role/example-eks-name-cluster-autoscaler-controller-irsa
+awsRegion: sa-east-1
