@@ -146,5 +146,5 @@ resource "aws_cognito_user_pool_client" "client-userpool-example-shared" {
 resource "aws_cognito_user_group" "example-user" {
   description  = "example-user"
   name         = "example-user"
-  user_pool_id = aws_cognito_user_pool.infraestruturanprod-shared.id
+  user_pool_id = aws_cognito_user_pool.example-shared.id
 }
